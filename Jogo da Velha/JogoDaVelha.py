@@ -4,12 +4,9 @@ class JogoDaVelha:
     for i in range(-1, 8):
         tabuleiro.append(i + 1)
 
-        turno = None
-
     def __init__(self, inicialPlayer="X"):
         self.turno = inicialPlayer
 
-    @classmethod
     def ImprimirTab(self):
         print("┌───┬───┬───┐")
         print(f"| {self.tabuleiro[0]} | {self.tabuleiro[1]} | {self.tabuleiro[2]} |")
