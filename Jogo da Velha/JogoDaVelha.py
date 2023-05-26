@@ -19,7 +19,7 @@ class JogoDaVelha:
     def Win(self):
         if self.tabuleiro[0] == self.tabuleiro[3] == self.tabuleiro[6]:
             return True
-        elif self.tabuleiro[1] == self.tabuleiro[4] == self.tabuleiro[5]:
+        elif self.tabuleiro[1] == self.tabuleiro[4] == self.tabuleiro[7]:
             return True
         elif self.tabuleiro[2] == self.tabuleiro[5] == self.tabuleiro[8]:
             return True
@@ -36,20 +36,35 @@ class JogoDaVelha:
         elif self.tabuleiro[2] == self.tabuleiro[4] == self.tabuleiro[6]:
             return True
 
+    def Empate(self):
+        for j in self.tabuleiro:
+            if j != 'X' and j != 'O':
+                return False
+        return True
+
     def jogar(self):
 
         while True:
-            print(f"Jogada de {self.turno}")
+            print(f"\nJogada de {self.turno}")
             self.ImprimirTab()
-            print(self.tabuleiro)
             chute = int(input("Digite uma posição: "))
+
+            posicaoOcupada = False
 
             for x in range(len(self.tabuleiro)):
                 if chute == self.tabuleiro[x]:
                     self.tabuleiro[x] = self.turno
-
+                    posicaoOcupada = True
+                    break
+            if not posicaoOcupada:
+                print("A posição já está ocupada. Tente novamente")
+                continue
             if self.Win():
-                print(f"Parabéns! {self.turno} venceu")
+                print(f"O jogador {self.turno} ganhou o jogo")
+                break
+
+            if self.Empate() and not self.Win():
+                print("Jogo deu empate!")
                 break
 
             if self.turno == "X":
